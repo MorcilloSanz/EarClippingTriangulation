@@ -26,8 +26,20 @@ int main() {
     double angle = ((2 * M_PI) / divisions) * (i + 1);
     vertices.push_back(Vector2(cx + radius * cos(angle), cy + radius * sin(angle)));
   }
+
+  // House without door
+  vertices = {
+    Vector2(300, 300), Vector2(300, 200), Vector2(200, 100), Vector2(100, 200), Vector2(100, 300)
+  };
+
+  // House with door
+  vertices = {
+    Vector2(300, 300), Vector2(300, 200), Vector2(200, 100), Vector2(100, 200), Vector2(100, 300), Vector2(150, 300), Vector2(150, 250), Vector2(175, 250), Vector2(175, 300)
+  };
+
   // Create polygon
   Poly polygon(vertices);
+  // Draw Polygon
   polygon.drawPolygon(Color(0, 0, 255));
   // Get triangulation
   std::vector<Triangle> triangulation = polygon.getEarClippingTriangulation();

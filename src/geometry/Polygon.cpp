@@ -37,8 +37,8 @@ std::vector<Triangle>& Poly::getEarClippingTriangulation() {
     return triangles;
   }
   // Start algorithm
+  bool valid = false;
   int vertexIndex = 0;
-  bool valid = true;
   std::vector<Vector2> tempVertices;
   do {
     // Neighbor indices
@@ -53,33 +53,34 @@ std::vector<Triangle>& Poly::getEarClippingTriangulation() {
     Vector2 v(followingVertex.x - currentVertex.x, followingVertex.y - currentVertex.y);  // v = f - v
     float angle = u.getAngle(v);  // Angle between both vectors
     // Check if it is a valid triangle
-    if(angle < M_PI) {  // if angle < 180º is convex
-        // Create triangle from the vertices
-        Triangle triangle(previousVertex, currentVertex, followingVertex);
-        // Check wether there is any point of the vertices set inside of the triangle or not
+    valid = (angle < M_PI); // If angle < 180º, its convex so its valid
+    if(valid) {
+      // Create triangle from the vertices
+      Triangle triangle(previousVertex, currentVertex, followingVertex);
+      // Check wether there is any point of the vertices set inside of the triangle or not
+      for(Vector2 vertex : triangulationVertices) {
+        if((vertex.x != currentVertex.x && vertex.y != currentVertex.y) && (vertex.x != previousVertex.x && vertex.y != previousVertex.y)
+        && (vertex.x != followingVertex.x && vertex.y != followingVertex.y)) {
+          if(triangle.contains(vertex)) valid = false;
+        }
+      }
+      // If still valid, add the triangle and remove the found ear
+      if(valid) {
+        triangles.push_back(triangle);
+        // Add every vertex except the current one, what is the same as removing it
         for(Vector2 vertex : triangulationVertices) {
-          if((vertex.x != currentVertex.x && vertex.y != currentVertex.y) && (vertex.x != previousVertex.x && vertex.y != previousVertex.y)
-              && (vertex.x != followingVertex.x && vertex.y != followingVertex.y)) {
-            if(triangle.contains(vertex))
-              valid = false;
-          }
+          if((vertex.x == currentVertex.x) && (vertex.y == currentVertex.y)) continue;
+          tempVertices.push_back(vertex);
         }
-        // If valid, add the triangle and remove the found ear
-        if(valid) {
-          triangles.push_back(triangle);
-          // Add every vertex except the current vertex in order to remove it
-          for(Vector2 vertex : triangulationVertices) {
-            if((vertex.x == currentVertex.x) && (vertex.y == currentVertex.y))
-              continue;
-            tempVertices.push_back(vertex);
-          }
-          break;
-        }
+        break;
+      }
     }
+    // Go to the next vertex
+    vertexIndex ++;
     // Only add invalid vertices, which is the same as removing the valid ones
     tempVertices.push_back(currentVertex);
-    vertexIndex ++;
-  } while(!valid && vertexIndex < triangulationVertices.size());
+    // Repeat until find a valid vertex
+  } while( !valid && vertexIndex < tempVertices.size());
   // Iterate through the rest of the vertices
   triangulationVertices.assign(tempVertices.begin(), tempVertices.end());
   return getEarClippingTriangulation();

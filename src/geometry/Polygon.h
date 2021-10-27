@@ -22,7 +22,7 @@ public:
   ~Poly() = default;
   Poly& operator=(const Poly& poly);
 public:
-  std::vector<Triangle>& getEarClippingTriangulation();
+  std::vector<Triangle>& getEarClippingTriangulation(); // Counterclockwise direction
   void drawPolygon(const Color& color);
 public:
   inline std::vector<Vector2>& getVertices() {
