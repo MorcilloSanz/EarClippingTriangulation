@@ -18,7 +18,7 @@ int main() {
   ConsoleRender::drawText("Ear clipping triangulation example:", 20, 20, Color(255, 255, 255));
 
   // Generate vertices
-  unsigned int divisions = 9;
+  unsigned int divisions = 12;
   unsigned int cx = 250, cy = 250;
   unsigned int radius = 150;
   std::vector<Vector2> vertices;

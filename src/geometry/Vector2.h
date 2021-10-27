@@ -35,6 +35,6 @@ struct Vector2 {
   }
 
   inline friend std::ostream& operator << (std::ostream& os, const Vector2& vec) {
-      return os << "x: " << vec.x << ", y: " << vec.y << std::endl;
+      return os << "x: " << vec.x << ", y: " << vec.y;
   }
 };

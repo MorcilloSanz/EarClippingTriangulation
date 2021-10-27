@@ -69,8 +69,9 @@ std::vector<Triangle>& Poly::getEarClippingTriangulation() {
           triangles.push_back(triangle);
           // Add every vertex except the current vertex in order to remove it
           for(Vector2 vertex : triangulationVertices) {
-            if(vertex.x != currentVertex.x && vertex.y != currentVertex.y)
-              tempVertices.push_back(vertex);
+            if((vertex.x == currentVertex.x) && (vertex.y == currentVertex.y))
+              continue;
+            tempVertices.push_back(vertex);
           }
           break;
         }
