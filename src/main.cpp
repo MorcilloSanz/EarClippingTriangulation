@@ -18,9 +18,9 @@ int main() {
   ConsoleRender::drawText("Ear clipping triangulation example:", 20, 20, Color(255, 255, 255));
 
   // Generate vertices
-  unsigned int divisions = 12;
+  unsigned int divisions = 11;
   unsigned int cx = 250, cy = 250;
-  unsigned int radius = 150;
+  unsigned int radius = 100;
   std::vector<Vector2> vertices;
   for(int i = 0; i < divisions; i ++) {
     double angle = ((2 * M_PI) / divisions) * (i + 1);

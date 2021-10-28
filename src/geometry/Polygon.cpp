@@ -59,8 +59,7 @@ std::vector<Triangle>& Poly::getEarClippingTriangulation() {
       Triangle triangle(previousVertex, currentVertex, followingVertex);
       // Check wether there is any point of the vertices set inside of the triangle or not
       for(Vector2 vertex : triangulationVertices) {
-        if((vertex.x != currentVertex.x && vertex.y != currentVertex.y) && (vertex.x != previousVertex.x && vertex.y != previousVertex.y)
-        && (vertex.x != followingVertex.x && vertex.y != followingVertex.y)) {
+        if(vertex != currentVertex && vertex != previousVertex && vertex != followingVertex) {
           if(triangle.contains(vertex)) valid = false;
         }
       }
@@ -77,10 +76,8 @@ std::vector<Triangle>& Poly::getEarClippingTriangulation() {
     }
     // Go to the next vertex
     vertexIndex ++;
-    // Only add invalid vertices, which is the same as removing the valid ones
-    tempVertices.push_back(currentVertex);
-    // Repeat until find a valid vertex
-  } while( !valid && vertexIndex < tempVertices.size());
+    // Repeat until finding a valid vertex
+  } while(!valid);
   // Iterate through the rest of the vertices
   triangulationVertices.assign(tempVertices.begin(), tempVertices.end());
   return getEarClippingTriangulation();

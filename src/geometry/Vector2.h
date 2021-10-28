@@ -34,6 +34,14 @@ struct Vector2 {
     return x * rhs.y - y * rhs.x;
   }
 
+  inline bool operator == (const Vector2& rhs) const {
+    return (x == rhs.x && y == rhs.y);
+  }
+
+  inline bool operator != (const Vector2& rhs) const {
+    return (x != rhs.x || y != rhs.y);
+  }
+
   inline friend std::ostream& operator << (std::ostream& os, const Vector2& vec) {
       return os << "x: " << vec.x << ", y: " << vec.y;
   }
