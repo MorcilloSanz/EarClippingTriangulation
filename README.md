@@ -15,14 +15,15 @@ Create a polygon and get the triangulation
   Poly polygon(vertices);
   polygon.drawPolygon(Color(0, 0, 255));
   
-  // Get triangulation
   std::vector<Triangle> triangulation = polygon.getEarClippingTriangulation();
   
-  // Draw triangles
   for(Triangle triangle : triangulation) {
     drawTriangle(triangle, Color(0, 255, 0));
   }
   
 ```
+
+**Warning:** Counterclockwise triangulation
+
 ### Demo
 ![alt text](https://github.com/MorcilloSanz/EarClippingTriangulation/blob/main/img/demo.png)  
