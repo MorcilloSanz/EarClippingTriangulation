@@ -1,9 +1,7 @@
 # EarClippingTriangulation
-
 Basic ear clipping triangulation algorithm in C++
 
 ### Usage
-
 Create a polygon and get the triangulation
 
 ```cpp
@@ -26,7 +24,5 @@ Create a polygon and get the triangulation
   }
   
 ```
-
 ### Demo
-
 ![alt text](https://github.com/MorcilloSanz/EarClippingTriangulation/blob/main/img/demo.png)  
