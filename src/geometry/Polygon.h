@@ -47,7 +47,7 @@ public:
   Poly& operator=(const Poly& poly);
 public:
   std::vector<Triangle>& getEarClippingTriangulation(); // Counterclockwise direction
-  void drawPolygon(const Color& color);
+  void draw(const Color& color);
 public:
   inline std::vector<Vector2>& getVertices() {
     return vertices;

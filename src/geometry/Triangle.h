@@ -28,8 +28,11 @@
 #include <sstream>
 
 #include "Vector2.h"
+#include "../consoleRender/ConsoleRender.h"
 
 #define M_PI 3.14159265358979323846264338327950288
+
+using namespace cr;
 
 struct Triangle {
   Vector2 v1, v2, v3;
@@ -49,6 +52,10 @@ struct Triangle {
     float t = static_cast<float>(vs1 ^ q) / (vs1 ^ vs2);
 
     return (s >= 0) && (t >= 0) && (s + t <= 1);
+  }
+
+  inline void draw(const Color& color) {
+    ConsoleRender::drawTriangle(v1.x, v1.y, v2.x, v2.y, v3.x, v3.y, color);
   }
 
   inline float getArea() {

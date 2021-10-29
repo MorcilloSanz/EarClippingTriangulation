@@ -83,7 +83,7 @@ std::vector<Triangle>& Poly::getEarClippingTriangulation() {
   return getEarClippingTriangulation();
 }
 
-void Poly::drawPolygon(const Color& color) {
+void Poly::draw(const Color& color) {
   for(int i = 0; i < vertices.size() - 1; i ++)
       ConsoleRender::drawLine(vertices[i].x, vertices[i].y, vertices[i + 1].x, vertices[i + 1].y, color);
   ConsoleRender::drawLine(vertices[vertices.size() - 1].x, vertices[vertices.size() - 1].y, vertices[0].x, vertices[0].y, color);
